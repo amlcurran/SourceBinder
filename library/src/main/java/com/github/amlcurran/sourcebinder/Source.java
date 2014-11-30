@@ -24,6 +24,13 @@ public interface Source<T> {
     void setSourceChangeListener(SourceChangeListener changeListener);
 
     public interface SourceChangeListener {
+        public SourceChangeListener NULL_IMPL = new SourceChangeListener() {
+            @Override
+            public void sourceChanged() {
+
+            }
+        };
+
         void sourceChanged();
     }
 }

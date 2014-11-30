@@ -19,12 +19,12 @@ package com.github.amlcurran.sourcebinder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArrayListSource<T> implements Source<T> {
+public class ListSource<T> implements Source<T> {
 
     private final ArrayList<T> list;
     private SourceChangeListener changeListener;
 
-    public ArrayListSource() {
+    public ListSource() {
         list = new ArrayList<T>();
     }
 
@@ -40,7 +40,11 @@ public class ArrayListSource<T> implements Source<T> {
 
     @Override
     public void setSourceChangeListener(SourceChangeListener changeListener) {
-        this.changeListener = changeListener;
+        if (changeListener == null) {
+            this.changeListener = SourceChangeListener.NULL_IMPL;
+        } else {
+            this.changeListener = changeListener;
+        }
     }
 
     public void replace(List<T> conversations) {
