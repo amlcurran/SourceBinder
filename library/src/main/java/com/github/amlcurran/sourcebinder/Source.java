@@ -16,21 +16,19 @@
 
 package com.github.amlcurran.sourcebinder;
 
+import java.util.List;
+
 public interface Source<T> {
     T getAtPosition(int position);
 
     int getCount();
 
-    void setSourceChangeListener(SourceChangeListener changeListener);
+    void setSourceChangeListener(SourceChangeListener<T> changeListener);
 
-    public interface SourceChangeListener {
-        public SourceChangeListener NULL_IMPL = new SourceChangeListener() {
-            @Override
-            public void sourceChanged() {
+    public interface SourceChangeListener<T> {
 
-            }
-        };
+        void sourceChanged(List<T> items);
 
-        void sourceChanged();
+        void itemAdded(int position, T item);
     }
 }

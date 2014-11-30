@@ -21,7 +21,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-public class SourceBinderAdapter<T> extends BaseAdapter implements Source.SourceChangeListener {
+import java.util.List;
+
+public class SourceBinderAdapter<T> extends BaseAdapter implements Source.SourceChangeListener<T> {
 
     private final Binder<T> binder;
     private final Source<T> source;
@@ -74,7 +76,7 @@ public class SourceBinderAdapter<T> extends BaseAdapter implements Source.Source
     }
 
     @Override
-    public void sourceChanged() {
+    public void sourceChanged(List items) {
         notifyDataSetChanged();
     }
 
@@ -84,6 +86,11 @@ public class SourceBinderAdapter<T> extends BaseAdapter implements Source.Source
      * @deprecated notifying changed datasets should be the responsibility of the source (see {@link com.espian.utils.data.Source.SourceChangeListener}).
      */
     public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+    }
+
+    @Override
+    public void itemAdded(int position, T item) {
         super.notifyDataSetChanged();
     }
 }

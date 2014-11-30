@@ -229,7 +229,7 @@ public abstract class AdaptiveCursorSource<T> implements Source<T> {
     };
 
     private Cursor cursor = NONE;
-    private SourceChangeListener changeListener;
+    private SourceChangeListener<T> changeListener;
 
     public void setCursor(Cursor cursor) {
         this.cursor.close();
@@ -239,7 +239,7 @@ public abstract class AdaptiveCursorSource<T> implements Source<T> {
         } else {
             this.cursor = cursor;
         }
-        changeListener.sourceChanged();
+        changeListener.sourceChanged(null);
     }
 
     @Override
@@ -254,7 +254,7 @@ public abstract class AdaptiveCursorSource<T> implements Source<T> {
     }
 
     @Override
-    public void setSourceChangeListener(SourceChangeListener changeListener) {
+    public void setSourceChangeListener(SourceChangeListener<T> changeListener) {
         this.changeListener = changeListener;
     }
 

@@ -22,7 +22,7 @@ import java.util.List;
 public class ListSource<T> implements Source<T> {
 
     private final ArrayList<T> list;
-    private SourceChangeListener changeListener;
+    private SourceChangeListener<T> changeListener = new NullSourceChangeListener<T>();
 
     public ListSource() {
         list = new ArrayList<T>();
@@ -39,17 +39,34 @@ public class ListSource<T> implements Source<T> {
     }
 
     @Override
-    public void setSourceChangeListener(SourceChangeListener changeListener) {
+    public void setSourceChangeListener(SourceChangeListener<T> changeListener) {
         if (changeListener == null) {
-            this.changeListener = SourceChangeListener.NULL_IMPL;
+            this.changeListener = new NullSourceChangeListener<T>();
         } else {
             this.changeListener = changeListener;
         }
     }
 
-    public void replace(List<T> conversations) {
+    public void replace(List<T> items) {
         list.clear();
-        list.addAll(conversations);
-        changeListener.sourceChanged();
+        list.addAll(items);
+        changeListener.sourceChanged(items);
+    }
+
+    public void addAtEnd(T item) {
+        list.add(item);
+        changeListener.itemAdded(list.size() - 1, item);
+    }
+
+    private static class NullSourceChangeListener<T> implements SourceChangeListener<T> {
+        @Override
+        public void sourceChanged(List<T> items) {
+
+        }
+
+        @Override
+        public void itemAdded(int position, T item) {
+
+        }
     }
 }

@@ -5,6 +5,8 @@ import android.view.ViewGroup;
 
 import com.github.amlcurran.sourcebinder.Source;
 
+import java.util.List;
+
 public class RecyclerSourceBinderAdapter<Item, Holder extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<Holder> {
 
     private final Source<Item> source;
@@ -46,8 +48,13 @@ public class RecyclerSourceBinderAdapter<Item, Holder extends RecyclerView.ViewH
 
     private class UpdateSelfListener implements Source.SourceChangeListener {
         @Override
-        public void sourceChanged() {
+        public void sourceChanged(List items) {
             notifyDataSetChanged();
+        }
+
+        @Override
+        public void itemAdded(int position, Object item) {
+            notifyItemInserted(position);
         }
     }
 }
