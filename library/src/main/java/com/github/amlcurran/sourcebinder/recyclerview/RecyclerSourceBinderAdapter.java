@@ -16,6 +16,14 @@ public class RecyclerSourceBinderAdapter<Item, Holder extends RecyclerView.ViewH
         this.viewHolderBinder = viewHolderBinder;
     }
 
+    public void setSourceChangeListener(Source.SourceChangeListener listener) {
+        this.source.setSourceChangeListener(listener);
+    }
+
+    public void setDefaultSourceChangeListener() {
+        setSourceChangeListener(new UpdateSelfListener());
+    }
+
     @Override
     public Holder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         return viewHolderBinder.createViewHolder(viewGroup, viewType);
