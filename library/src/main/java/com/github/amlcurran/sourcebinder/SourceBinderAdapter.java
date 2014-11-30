@@ -93,4 +93,9 @@ public class SourceBinderAdapter<T> extends BaseAdapter implements Source.Source
     public void itemAdded(int position, T item) {
         super.notifyDataSetChanged();
     }
+
+    @Override
+    public void itemRemoved(int removedIndex, T item) {
+        super.notifyDataSetChanged();
+    }
 }

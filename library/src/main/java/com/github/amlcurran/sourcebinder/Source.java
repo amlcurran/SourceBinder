@@ -30,5 +30,7 @@ public interface Source<T> {
         void sourceChanged(List<T> items);
 
         void itemAdded(int position, T item);
+
+        void itemRemoved(int removedIndex, T item);
     }
 }

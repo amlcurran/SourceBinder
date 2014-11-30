@@ -56,5 +56,10 @@ public class RecyclerSourceBinderAdapter<Item, Holder extends RecyclerView.ViewH
         public void itemAdded(int position, Object item) {
             notifyItemInserted(position);
         }
+
+        @Override
+        public void itemRemoved(int removedIndex, Object item) {
+            notifyItemRemoved(removedIndex);
+        }
     }
 }

@@ -58,6 +58,19 @@ public class ListSource<T> implements Source<T> {
         changeListener.itemAdded(list.size() - 1, item);
     }
 
+    public void add(int position, T item) {
+        list.add(position, item);
+        changeListener.itemAdded(position, item);
+    }
+
+    public void removeItem(T item) {
+        int removalIndex = list.indexOf(item);
+        if (removalIndex > 0) {
+            list.remove(item);
+            changeListener.itemRemoved(removalIndex, item);
+        }
+    }
+
     private static class NullSourceChangeListener<T> implements SourceChangeListener<T> {
         @Override
         public void sourceChanged(List<T> items) {
@@ -66,6 +79,11 @@ public class ListSource<T> implements Source<T> {
 
         @Override
         public void itemAdded(int position, T item) {
+
+        }
+
+        @Override
+        public void itemRemoved(int removedIndex, T item) {
 
         }
     }
