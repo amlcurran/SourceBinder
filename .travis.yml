@@ -5,3 +5,5 @@ android:
     - tools
     - build-tools-21.1.1
     - android-21
+
+script: ./gradlew build test
